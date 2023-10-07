@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{tweetTitle}}</h1>
+<div mat-dialog-content>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Favorite Animal</mat-label>
+      <input matInput [(ngModel)]="data.animal">
+    </mat-form-field> -->
+    <form #tweetForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <textarea placeholder="write your thoughts here!" style="width: 430px;"
+            class="form-control"
+            id="tweet"
+            [(ngModel)]="tweetContent"
+            name="tweet"
+            #tweet="ngModel"
+            required
+            maxlength="240"
+            ></textarea>
+            <div *ngIf="tweet.touched && tweetForm.invalid" class="alert alert-danger">
+                <div *ngIf="tweet.errors?.required">
+                    contents is required
+                </div>
+                <div *ngIf="tweet.errors?.maxlength">
+                    content can't be more than 240 characters
+                </div>
+            </div>
+        </div>
+    </form> 
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button *ngIf="!showUpdateBtn" mat-button [mat-dialog-close]="tweet.value" cdkFocusInitial [disabled]="tweetForm.invalid" (click)="onSubmit()">Add Tweet</button>
+    <button *ngIf="showUpdateBtn" mat-button [mat-dialog-close]="tweet.value" cdkFocusInitial [disabled]="tweetForm.invalid" (click)="onUpdate()">Update Tweet</button>
+  </div>

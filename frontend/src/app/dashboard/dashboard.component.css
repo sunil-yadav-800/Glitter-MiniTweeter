@@ -1,0 +1,30 @@
+
+nav{
+    background-color:aquamarine;
+    height: 35px;
+    color: white;
+}
+li{
+    display: inline;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 7px;
+    font-size: medium;
+}
+.btn-logOut{
+   margin-right: 15px;
+   float: right;
+}
+.userName{
+    margin-right: 25px;
+    float: right;
+    color: brown;
+}
+.active{
+    color: black;
+    border: 5px;
+    border-radius: 5px;
+    border-color: azure;
+    background-color: blueviolet;
+    font-size: medium;
+}

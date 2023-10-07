@@ -1,0 +1,21 @@
+<app-dashboard></app-dashboard>
+<div class="user-container" >
+    <mat-card class="user-card" *ngFor="let f of followings">
+        <mat-card-header>
+          <mat-card-title>
+            <div class="people-image">
+            <img mat-card-image [src]="f?.userImage" alt="user photo">
+            </div>
+          </mat-card-title>
+        </mat-card-header> 
+        <mat-card-content>
+          {{f?.firstName}} {{f?.lastName}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="f?.isFollowed" mat-raised-button (click)="onUnFollow(f?.userId)">UnFollow</button>
+        </mat-card-actions>
+      </mat-card>
+      
+</div>
+
+

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+     <nav class="navbar  bg-primary">
+      </nav>
+        
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+        <div class="card text-center">
+            <div class="card-header">
+              Login
+            </div>
+            <div class="card-body"> 
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                      <label for="Email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="email" formControlName="email" >
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" formControlName="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
+                  </form>
+            </div>  
+          </div>
+        </div>
+      </div>
+     <div class="register">
+        <a [routerLink]="['/register']" routerLinkActive="router-link-active" >Register</a>
+     </div>
+</div>

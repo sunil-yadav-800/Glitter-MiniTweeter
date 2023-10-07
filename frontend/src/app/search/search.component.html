@@ -1,0 +1,56 @@
+<app-dashboard></app-dashboard>
+
+<div class="search">
+    <input type="text" placeholder="search" [(ngModel)]="search"/>
+    <!-- <button mat-raised-button class="btn-search" [routerLink]="['/search/people/',search]">Search</button><br> -->
+    <button mat-raised-button class="btn-search" (click)="onSearchClick()">Search</button><br>
+</div>
+
+<div class="people-post">
+<!-- <a routerLink="/search/people/{{search}}"><button mat-raised-button [disabled]="!search">People</button></a>
+
+<a routerLink="/search/posts/{{search}}"><button mat-raised-button [disabled]="!search">Posts</button></a> -->
+<div class="btn-people-post">
+<button  (click)="onPeopleClick()" [style.background-color]="showPeople ? 'yellowgreen' : '' ">People({{totalPeoples}})</button>&nbsp;
+<button  (click)="onPostClick()" [style.background-color]="showPost ? 'yellowgreen' : '' ">Posts({{totalPosts}})</button>
+</div>
+<!-- <router-outlet></router-outlet> -->
+</div>
+<br/>
+<br/>
+<div class="user-container" *ngIf="showPeople">
+    <mat-card class="user-card" *ngFor="let people of peoples">
+        <mat-card-header>
+          <mat-card-title>
+            <div class="people-image">
+            <img mat-card-image [src]="people?.userImage" alt="user photo">
+            </div>
+        </mat-card-title>
+        </mat-card-header> 
+        <mat-card-content>
+          {{people?.firstName}} {{people?.lastName}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="!people?.isFollowed" mat-raised-button (click)="onFollow(people?.userId)">Follow</button>
+          <button *ngIf="people?.isFollowed" mat-raised-button (click)="onUnFollow(people?.userId)">UnFollow</button>
+        </mat-card-actions>
+      </mat-card>
+</div>
+<div class="post-container" *ngIf="showPost">
+    <mat-card *ngFor="let tweet of allTweets">
+        <mat-card-header>
+          <mat-card-title></mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <img [src]="tweet.userImage" alt="user-img" />
+            {{tweet?.message}}   
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="!tweet?.isLiked" (click)="onLike(tweet.id,tweet.userId)" class="btn-like"><mat-icon>thumb_up</mat-icon></button>
+          <button *ngIf="tweet?.isLiked" (click)="onDisLike(tweet.id,tweet.userId)" class="btn-dislike"><mat-icon>thumb_up</mat-icon></button>
+          <button mat-raised-button color="primary" *ngIf="tweet?.userId == loggedInUser?.id" (click)="onEdit(tweet)">Edit</button>
+          <button mat-raised-button color="warn" *ngIf="tweet?.userId == loggedInUser?.id" (click)="onDelete(tweet.id)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+</div>

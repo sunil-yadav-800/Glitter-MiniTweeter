@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <nav class="navbar  bg-primary">
+     </nav>
+       
+     <div class="row">
+       <div class="col d-flex justify-content-center">
+       <div class="card text-center">
+           <div class="card-header">
+             Register
+           </div>
+           <div class="card-body"> 
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-5">
+                <div class="mb-3">
+                  <label for="Email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" formControlName="email" >
+                  <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registerForm.controls['email'].errors?.required">Email is required</div>
+                  <div *ngIf="registerForm.controls['email'].errors?.email">please input correct email</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" formControlName="password">
+                  <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registerForm.controls['password'].errors?.required">Password is required</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                 <label for="firstName" class="form-label">First Name</label>
+                 <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                 <div *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registerForm.controls['firstName'].errors?.required">First Name is required</div>
+                  </div>
+               </div>
+               <div class="mb-3">
+                 <label for="lastName" class="form-label">Last Name</label>
+                 <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                 <div *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registerForm.controls['lastName'].errors?.required">Last Name is required</div>
+                  </div>
+               </div>
+               </div>
+               <div class="col-6">
+               <div class="mb-3">
+                 <label for="profilePic" class="form-label">Profile img</label>
+                 <input type="file" class="form-control" (change)="saveFile($event)" id="profilePic" formControlName="profilePic" accept=".jpg,.png">
+                 <div *ngIf="registerForm.controls['profilePic'].invalid && (registerForm.controls['profilePic'].dirty || registerForm.controls['profilePic'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registerForm.controls['profilePic'].errors?.required">Profile Pic is required</div>
+                  </div>
+               </div>
+               <div class="mb-3">
+                 <label for="contact" class="form-label">Contact</label>
+                 <input type="text" class="form-control" id="contact" formControlName="contact">
+                 <div *ngIf="registerForm.controls['contact'].invalid && (registerForm.controls['contact'].dirty || registerForm.controls['contact'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registerForm.controls['contact'].errors?.required">Contact is required</div>
+                  </div>
+               </div>
+               <div class="mb-3">
+                 <label for="country" class="form-label">Country: </label>
+                 <select name="" id="" formControlName="country">
+                  <option value="" [disabled]="">please select your country..</option>
+                  <option value="{{c}}" *ngFor="let c of country_list">{{c}}</option>
+                 </select>
+                 <div *ngIf="registerForm.controls['country'].invalid && (registerForm.controls['country'].dirty || registerForm.controls['country'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registerForm.controls['country'].errors?.required">Country is required</div>
+                  </div>
+               </div>
+               </div>
+              </div>
+                
+               <div class="col d-flex justify-content-center">
+        
+              </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid" >Submit</button>
+              </form>
+           </div>  
+         </div>
+       </div>
+       
+     </div>
+</div>
