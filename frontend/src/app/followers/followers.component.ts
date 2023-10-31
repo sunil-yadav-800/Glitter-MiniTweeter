@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-followers',
   templateUrl: './followers.component.html',
@@ -9,7 +10,7 @@ import { ServiceService } from '../service.service';
 export class FollowersComponent implements OnInit {
  loggedInUser : any;
  followers : any; 
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.service.getLocalData("user"));
@@ -25,10 +26,12 @@ export class FollowersComponent implements OnInit {
           this.followers = result?.data;
         }
         else{
-          alert(result?.message);
+          //alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err");
+      //alert("err");
+      this.toastr.error("Error");
     });
   }
 
@@ -39,13 +42,14 @@ export class FollowersComponent implements OnInit {
         {
           this.getAllFollowers();
           this.service.subject.next(true);
-         console.log(result?.message)
         }
         else{
-          alert(result?.message);
+          //alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err")
+      //alert("err")
+      this.toastr.error("Error");
     });
   }
   onUnFollow(otherUserId:any){
@@ -55,13 +59,15 @@ export class FollowersComponent implements OnInit {
         {
           this.getAllFollowers();
           this.service.subject.next(true);
-         console.log(result?.message)
+         //console.log(result?.message)
         }
         else{
-          alert(result?.message);
+          //alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err")
+      //alert("err")
+      this.toastr.error("Error");
     });
   }
 

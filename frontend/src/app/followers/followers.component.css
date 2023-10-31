@@ -1,13 +1,12 @@
 .user-container{
   margin-top: 30px;
-  margin-left: 10px;
-  width: 600px;
-  height: 230px;
-  display: flex;
+  margin-left: 40px;
+ 
   text-align: center;
   display: flex;
   position: relative;
   gap: 20px;
+  flex-wrap: wrap;
 }
 .people-image {
   display: flex;
@@ -24,3 +23,10 @@
   width: 90px;
   border-radius: 50%;
 }
+.user-card {
+  width: calc(15% - 16px); /* 20% width for 5 cards in a row, considering margin */
+  margin-bottom: 16px; /* Adjust the margin as needed */
+  box-sizing: border-box;
+}
+
+  

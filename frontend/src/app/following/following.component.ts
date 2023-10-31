@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-following',
   templateUrl: './following.component.html',
@@ -9,7 +10,7 @@ import { ServiceService } from '../service.service';
 export class FollowingComponent implements OnInit {
   loggedInUser : any;
   followings : any; 
-  constructor(private service : ServiceService) { 
+  constructor(private service : ServiceService, private toastr: ToastrService) { 
     
   }
 
@@ -28,10 +29,12 @@ export class FollowingComponent implements OnInit {
           
         }
         else{
-          alert(result?.message);
+          //alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err");
+      //alert("err");
+      this.toastr.error("Error");
     });
   }
 
@@ -41,13 +44,16 @@ export class FollowingComponent implements OnInit {
         if(result?.successful == true)
         {
           this.getAllFollowings();
-         console.log(result?.message)
+          this.service.subject.next(true);
+         //console.log(result?.message)
         }
         else{
-          alert(result?.message);
+          //alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err")
+      //alert("err")
+      this.toastr.error("Error");
     });
   }
 

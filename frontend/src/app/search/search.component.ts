@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { TweetDialogComponent } from '../tweet-dialog/tweet-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -16,7 +19,12 @@ showPeople : boolean = false;
 showPost : boolean = false;
 totalPeoples = 0;
 totalPosts = 0;
-  constructor(private service: ServiceService,private dialog:MatDialog) { }
+  constructor(private service: ServiceService,private dialog:MatDialog, private toastr: ToastrService, private spinner: NgxSpinnerService) {
+    this.service.subject.subscribe((res)=>{
+      this.searchPeople(this.search, this.loggedInUser?.id);
+      this.searchTweet(this.search);
+    })
+   }
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.service.getLocalData("user"));
@@ -24,11 +32,13 @@ totalPosts = 0;
 
   searchPeople(searchTerm:any, userId:any)
   {
+    this.spinner.show();
     if(searchTerm == "")
     {
       searchTerm = undefined;
     }
     this.service.searchPeople(searchTerm,userId).subscribe((res)=>{
+      this.spinner.hide();
       var result = JSON.parse(JSON.stringify(res));
         if(result?.successful == true)
         {
@@ -41,20 +51,25 @@ totalPosts = 0;
          }
         }
         else{
-          alert(result?.message);
+          // alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err:searchPeople");
+      // alert("err:searchPeople");
+      this.spinner.hide();
+      this.toastr.error("Error:searchPeople");
     });
   }
 
   searchTweet(searchTerm:any)
   {
+    this.spinner.show();
     if(searchTerm == "")
     {
       searchTerm = undefined;
     }
     this.service.searchTweet(searchTerm).subscribe((res)=>{
+      this.spinner.hide();
       var result = JSON.parse(JSON.stringify(res));
         if(result?.successful == true)
         {
@@ -67,10 +82,13 @@ totalPosts = 0;
          }
         }
         else{
-          alert(result?.message);
+          // alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err:searchTweet");
+      // alert("err:searchTweet");
+      this.spinner.hide();
+      this.toastr.error("Error:searchTweet");
     });
   }
   onSearchClick(){
@@ -103,10 +121,12 @@ totalPosts = 0;
           this.showPost = false;
         }
         else{
-          alert(result?.message);
+          // alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err")
+      // alert("err")
+      this.toastr.error("Error");
     });
   }
   onUnFollow(otherUserId:any){
@@ -123,21 +143,26 @@ totalPosts = 0;
           this.showPost = false;
         }
         else{
-          alert(result?.message);
+          // alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err")
+      // alert("err")
+      this.toastr.error("Error");
     });
   }
 
   onDelete(id:any)
     {
+      this.spinner.show();
       this.service.deleteTweet(id).subscribe((res)=>{
+        this.spinner.hide();
         var result = JSON.parse(JSON.stringify(res));
         if(result?.successful == true)
         {
           //alert("tweet deleted");
          // window.location.reload();
+         this.toastr.success("Tweet deleted successfully");
           this.search = this.service.getLocalData("searchTerm");
           this.searchPeople(this.search, this.loggedInUser?.id);
           this.searchTweet(this.search);
@@ -146,10 +171,13 @@ totalPosts = 0;
         }
         else
         {
-          alert(result?.message);
+          // alert(result?.message);
+          this.toastr.error(result?.message);
         }
       },(err)=>{
-        alert("err");
+        // alert("err");
+        this.spinner.hide();
+        this.toastr.error("Error");
       });
     }
     onLike(tweetId:any, userId:any)
@@ -168,10 +196,12 @@ totalPosts = 0;
         }
         else
         {
-          alert(result?.message);
+          // alert(result?.message);
+          this.toastr.error(result?.message);
         }
       },(err)=>{
-        alert("err");
+        // alert("err");
+        this.toastr.error("Error");
       });
     }
     onDisLike(tweetId:any, userId:any)
@@ -190,10 +220,12 @@ totalPosts = 0;
         }
         else
         {
-          alert(result?.message);
+          // alert(result?.message);
+          this.toastr.error(result?.message);
         }
       },(err)=>{
-        alert("err");
+        // alert("err");
+        this.toastr.error("Error");
       });
     }
     onEdit(tweet:any)

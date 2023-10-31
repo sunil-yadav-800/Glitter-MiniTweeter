@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../service.service';
 
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
@@ -11,7 +12,7 @@ export class PeopleComponent implements OnInit {
 searchTerm : any
 loggedInUser : any
 peoples: any
-  constructor(private route: ActivatedRoute, private service: ServiceService) { }
+  constructor(private route: ActivatedRoute, private service: ServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.searchTerm = this.route.snapshot.paramMap.get('searchTerm');
@@ -28,10 +29,12 @@ peoples: any
          this.peoples = result?.data;
         }
         else{
-          alert(result?.message);
+          //alert(result?.message);
+          this.toastr.error(result?.message);
         }
     },(err)=>{
-      alert("err");
+      // alert("err");
+      this.toastr.error("Error");
     });
   }
 

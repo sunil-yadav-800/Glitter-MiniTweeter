@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { PeopleComponent } from './people/people.component';
 import { PostsComponent } from './posts/posts.component';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
+
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +55,13 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    NgxSpinnerModule,
   ],
   providers: [
     {
@@ -61,6 +71,8 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
     },
     ServiceService
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
+ 
 })
 export class AppModule { }

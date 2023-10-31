@@ -13,31 +13,17 @@
 a{
     margin-right: 10px;
 }
-/* .user-card {
-    margin-top: 5px;
-    margin-right: 5px;
-    width: 150px;
-    height: 150px;
-    text-align: center;
-    position: relative;
-  box-sizing: border-box;
-  padding: 20px;
-  }  */
 .user-container{
-    margin-left: 10px;
-    width: 600px;
-    height: 230px;
-    display: flex;
+    margin-top: 30px;
+    margin-left: 40px;
+   
     text-align: center;
     display: flex;
     position: relative;
     gap: 20px;
-  /* flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px; 
-  margin: -10px;  */
-}
-.people-image {
+    flex-wrap: wrap;
+  }
+  .people-image {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +38,13 @@ a{
     width: 90px;
     border-radius: 50%;
   }
+  .user-card {
+    width: calc(15% - 16px); /* 20% width for 5 cards in a row, considering margin */
+    margin-bottom: 16px; /* Adjust the margin as needed */
+    box-sizing: border-box;
+  }
+  
+    
   .post-container .btn-tweet{
     margin-top: 10px;
     float: right;
