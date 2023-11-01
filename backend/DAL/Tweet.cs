@@ -35,7 +35,7 @@ namespace backend.DAL
             
             foreach(var tt in orderedTweets)
             {
-                var likeResult = db.likes.Where(l => l.TweetId == tt.t.Id && l.UserId == tt.u.Id).ToList();
+                var likeResult = db.likes.Where(l => l.TweetId == tt.t.Id && l.UserId == userId).ToList();
                 bool liked = likeResult.Count > 0 ? true : false;
                 var imageBytes = File.ReadAllBytes(tt.u.profilePic);
                 var imageBase64 = Convert.ToBase64String(imageBytes);

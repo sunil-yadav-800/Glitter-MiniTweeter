@@ -79,8 +79,8 @@ export class ServiceService {
   {
     return this.httpClient.get(`https://localhost:44314/api/Search/searchPeople/${searchTerm}/${loggedInUserId}`);
   }
-  searchTweet(searchTerm:any){
-    return this.httpClient.get(`https://localhost:44314/api/Search/searchTweet/${searchTerm}`);
+  searchTweet(searchTerm:any, loggedInUserId:any){
+    return this.httpClient.get(`https://localhost:44314/api/Search/searchTweet/${searchTerm}/${loggedInUserId}`);
   }
 
   setLocalData(key:any, value:any) {

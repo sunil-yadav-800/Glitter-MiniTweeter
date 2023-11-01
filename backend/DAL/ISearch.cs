@@ -9,6 +9,6 @@ namespace backend.DAL
     public interface ISearch
     {
         public List<searchDto> searchPeople(string searchTerm, int userId);
-        public List<tweetDto> searchTweet(string searchTerm);
+        public List<tweetDto> searchTweet(string searchTerm, int userId);
     }
 }

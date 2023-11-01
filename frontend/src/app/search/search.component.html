@@ -47,8 +47,8 @@
             {{tweet?.message}}   
         </mat-card-content>
         <mat-card-actions>
-          <button *ngIf="!tweet?.isLiked" (click)="onLike(tweet.id,tweet.userId)" class="btn-like"><mat-icon>thumb_up</mat-icon></button>
-          <button *ngIf="tweet?.isLiked" (click)="onDisLike(tweet.id,tweet.userId)" class="btn-dislike"><mat-icon>thumb_up</mat-icon></button>
+          <button *ngIf="!tweet?.isLiked" (click)="onLike(tweet.id)" class="btn-like"><mat-icon>thumb_up</mat-icon></button>
+          <button *ngIf="tweet?.isLiked" (click)="onDisLike(tweet.id)" class="btn-dislike"><mat-icon>thumb_up</mat-icon></button>
           <button mat-raised-button color="primary" *ngIf="tweet?.userId == loggedInUser?.id" (click)="onEdit(tweet)">Edit</button>
           <button mat-raised-button color="warn" *ngIf="tweet?.userId == loggedInUser?.id" (click)="onDelete(tweet.id)">Delete</button>
         </mat-card-actions>

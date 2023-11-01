@@ -68,7 +68,7 @@ totalPosts = 0;
     {
       searchTerm = undefined;
     }
-    this.service.searchTweet(searchTerm).subscribe((res)=>{
+    this.service.searchTweet(searchTerm,this.loggedInUser?.id).subscribe((res)=>{
       this.spinner.hide();
       var result = JSON.parse(JSON.stringify(res));
         if(result?.successful == true)
@@ -180,9 +180,9 @@ totalPosts = 0;
         this.toastr.error("Error");
       });
     }
-    onLike(tweetId:any, userId:any)
+    onLike(tweetId:any)
     {
-      this.service.like(tweetId,userId).subscribe((res)=>{
+      this.service.like(tweetId,this.loggedInUser?.id).subscribe((res)=>{
         var result = JSON.parse(JSON.stringify(res));
         if(result?.successful == true)
         {
@@ -204,9 +204,9 @@ totalPosts = 0;
         this.toastr.error("Error");
       });
     }
-    onDisLike(tweetId:any, userId:any)
+    onDisLike(tweetId:any)
     {
-      this.service.disLike(tweetId,userId).subscribe((res)=>{
+      this.service.disLike(tweetId,this.loggedInUser?.id).subscribe((res)=>{
         var result = JSON.parse(JSON.stringify(res));
         if(result?.successful == true)
         {

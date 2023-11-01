@@ -39,12 +39,12 @@ namespace backend.Controllers
                 return Ok(new { successful = false, Message = ex.Message });
             }
         }
-        [HttpGet("searchTweet/{searchTerm}")]
-        public IActionResult searchTweet(string searchTerm)
+        [HttpGet("searchTweet/{searchTerm}/{userId}")]
+        public IActionResult searchTweet(string searchTerm, int userId)
         {
             try
             {
-                var posts = search.searchTweet(searchTerm);
+                var posts = search.searchTweet(searchTerm, userId);
                 if (posts.Count > 0)
                 {
                     return Ok(new { successful = true, data = posts });
